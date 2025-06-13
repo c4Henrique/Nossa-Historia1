@@ -591,95 +591,141 @@ footer {
 }
 
 .add-date-button:hover {
-    background: var(--secondary-color);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
 }
 
 /* Modal */
 .modal {
+    display: none; /* Garante que o modal inicia oculto */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
+    background: rgba(0, 0, 0, 0.6); /* Fundo escuro semitransparente */
+    display: flex; /* Para centralizar o conteúdo do modal */
     align-items: center;
+    justify-content: center;
     z-index: 1000;
 }
 
 .modal-content {
     background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 90%; /* Ajuste para responsividade */
+    width: 500px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeIn 0.3s ease-out;
 }
 
-.modal-content h3 {
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-content h3,
+.modal-content h2 {
     color: var(--primary-color);
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
     text-align: center;
+    font-size: 1.8rem;
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 8px;
     color: var(--text-color);
+    font-weight: bold;
 }
 
-.form-group input,
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="file"],
 .form-group textarea {
     width: 100%;
-    padding: 0.8rem;
-    border: 2px solid var(--accent-color);
-    border-radius: 5px;
+    padding: 12px;
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
     font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.2);
 }
 
 .form-group textarea {
-    height: 100px;
+    min-height: 100px;
     resize: vertical;
 }
 
 .form-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 1.5rem;
+    gap: 15px;
+    margin-top: 30px;
 }
 
 .form-actions button {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 5px;
+    padding: 12px 25px;
+    border-radius: 25px;
     cursor: pointer;
     font-size: 1rem;
+    font-weight: bold;
     transition: all 0.3s ease;
 }
 
 .form-actions button[type="button"] {
-    background: #f0f0f0;
-    color: var(--text-color);
+    background-color: #ccc;
+    color: #333;
+    border: none;
+}
+
+.form-actions button[type="button"]:hover {
+    background-color: #bbb;
 }
 
 .form-actions button[type="submit"] {
-    background: var(--primary-color);
+    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
     color: white;
-}
-
-.form-actions button:hover {
-    transform: translateY(-2px);
+    border: none;
 }
 
 .form-actions button[type="submit"]:hover {
-    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+}
+
+.form-actions button[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #ccc;
+    box-shadow: none;
+    transform: none;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 2rem;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #666;
 }
 
 /* Estilo para o título centralizado */
@@ -694,4 +740,243 @@ footer {
     text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);
     letter-spacing: 2px;
     font-family: 'Dancing Script', cursive;
+}
+
+@media (max-width: 768px) {
+    .gallery-title {
+        font-size: 2.2rem;
+        margin: 40px 0;
+        padding: 20px 0;
+    }
+
+    .nav-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        position: static;
+        padding: 10px;
+    }
+
+    .back-button, .logout-button {
+        width: 90%;
+        justify-content: center;
+    }
+
+    .gallery-container {
+        padding: 20px 10px;
+    }
+
+    .carousel-section,
+    .calendar-container,
+    .anniversary-counter,
+    .upcoming-dates,
+    .cards-section,
+    .videos-section,
+    #photos,
+    #upcoming-dates,
+    #date-ideas {
+        padding: 20px;
+        margin: 20px 0;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .countdown-container {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .countdown-item {
+        min-width: 80px;
+        padding: 15px;
+    }
+
+    .countdown-number {
+        font-size: 2rem;
+    }
+
+    .countdown-label {
+        font-size: 0.8rem;
+    }
+
+    .cards-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .love-letters-container,
+    .photos-container,
+    .video-carousel {
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+
+    .video-carousel-container {
+        padding: 0;
+    }
+
+    .video-carousel-item img,
+    .video-carousel-item video {
+        width: 100%;
+        height: auto;
+    }
+
+    .video-carousel-container .carousel-button {
+        padding: 10px;
+        font-size: 1.2rem;
+    }
+
+    .upcoming-dates-list,
+    .date-ideas-list {
+        padding: 0;
+    }
+
+    .upcoming-date-item,
+    .date-idea-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .upcoming-date-item span,
+    .date-idea-item span {
+        font-size: 1em;
+        text-align: left;
+    }
+
+    .delete-date-button,
+    .delete-idea-button {
+        align-self: flex-end;
+    }
+
+    .modal-content {
+        margin: 20px;
+        padding: 20px;
+        width: auto;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+
+    footer {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .relationship-date {
+        font-size: 1rem;
+    }
+
+    .gallery-title {
+        font-size: 1.8rem;
+    }
+
+    .countdown-number {
+        font-size: 1.8rem;
+    }
+
+    .countdown-label {
+        font-size: 0.7rem;
+    }
+
+    .card h3 {
+        font-size: 1.3rem;
+    }
+
+    .card p {
+        font-size: 0.9rem;
+    }
+
+    .modal-content h3,
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .form-actions button {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+
+    .close-modal {
+        font-size: 1.5rem;
+    }
+}
+
+.nav-buttons {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+.logout-button {
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+    background: linear-gradient(45deg, #ff1493, #ff69b4);
+}
+
+.logout-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(255, 105, 180, 0.3);
+}
+
+.logout-button i {
+    font-size: 16px;
+}
+
+.gallery-logo {
+    max-width: 150px; /* Adjust size as needed */
+    height: auto;
+    display: block; /* Ensures it takes its own line */
+    margin: 0 auto 10px auto; /* Centers the logo and adds some space below */
+}
+
+@media (max-width: 768px) {
+    .gallery-logo {
+        max-width: 100px;
+    }
 } 

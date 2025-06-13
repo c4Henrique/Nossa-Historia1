@@ -13,13 +13,13 @@ header {
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
-    flex: 0 0 auto; /* tamanho fixo */
+    justify-content: center;
 }
 
 .logo-img {
@@ -76,4 +76,35 @@ header {
 
 main {
     margin-top: 80px;
+}
+
+.main-nav {
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-logo {
+    max-width: 200px;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .logo-img {
+        height: 40px;
+    }
 } 

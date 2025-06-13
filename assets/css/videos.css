@@ -19,11 +19,12 @@
 
 .video-carousel-container {
     position: relative;
-    width: 100%; /* Agora ocupa 100% da largura do pai */
+    width: 100%;
     margin: 0 auto 30px auto;
-    /* overflow: hidden; */ /* Removido para diagnóstico */
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 0 50px; /* Espaço para os botões laterais */
+    box-sizing: border-box; /* Incluir padding na largura */
 }
 
 .video-carousel {
@@ -40,7 +41,6 @@
     text-align: center;
     background: #fdfdff;
     border-radius: 10px;
-    /* height: 100%; */ /* Removido para permitir altura dinâmica baseada no conteúdo */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,7 +60,6 @@
     width: 100%;
     padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
     height: 0;
-    /* overflow: hidden; */ /* Removido para diagnóstico */
     margin-bottom: 20px;
 }
 
@@ -72,8 +71,8 @@
     width: 100%;
     height: 100%;
     border-radius: 8px;
-    object-fit: contain; /* Garante que o vídeo inteiro seja visível */
-    max-height: none; /* Garante que o vídeo não seja cortado por altura máxima */
+    object-fit: contain;
+    max-height: none;
 }
 
 .carousel-button {
@@ -112,14 +111,15 @@
     padding: 12px 25px;
     border-radius: 25px;
     cursor: pointer;
-    display: inline-flex;
+    display: block; /* Ocupa largura total em mobile */
+    width: fit-content; /* Permite centralizar */
+    margin: 20px auto; /* Centralizar o botão */
     align-items: center;
     gap: 8px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 500;
     box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
     transition: all 0.3s ease;
-    margin-top: 20px;
 }
 
 .add-video-button:hover {
@@ -130,26 +130,29 @@
 
 /* Estilos do Modal de Vídeo */
 .video-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 100; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 100;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
-    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
     align-items: center;
     justify-content: center;
 }
 
+.video-modal.show {
+    display: flex;
+}
+
 .video-modal-content {
     background-color: #fefefe;
-    margin: auto;
-    padding: 30px;
+    margin: 20px; /* Margem para telas pequenas */
+    padding: 25px; /* Ajustar padding */
     border-radius: 20px;
-    width: 90%;
+    width: 95%; /* Porcentagem para largura em telas pequenas */
     max-width: 600px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     position: relative;
@@ -159,34 +162,40 @@
 .video-modal-content h3 {
     font-family: 'Dancing Script', cursive;
     color: #ff69b4;
-    font-size: 2rem;
-    margin-bottom: 25px;
+    font-size: 1.8rem;
+    margin-bottom: 20px; /* Ajustar margem */
     text-align: center;
 }
 
 .video-form-actions {
-    text-align: right;
+    display: flex; /* Usar flexbox */
+    flex-direction: column; /* Empilhar em mobile */
+    gap: 10px; /* Espaçamento entre botões */
     margin-top: 20px;
+}
+
+.video-form-actions button {
+    width: 100%; /* Botões ocupam largura total */
 }
 
 /* Botão de Excluir Vídeo no carrossel */
 .delete-video-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 8px; /* Ajustar posição */
+    right: 8px; /* Ajustar posição */
     background: rgba(255, 255, 255, 0.3);
     color: white;
     border: none;
-    width: 30px;
-    height: 30px;
+    width: 28px; /* Ajustar tamanho */
+    height: 28px; /* Ajustar tamanho */
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Ajustar tamanho do ícone */
     transition: background-color 0.3s ease, transform 0.3s ease;
-    opacity: 1; /* Sempre visível */
+    opacity: 1;
 }
 
 .delete-video-button:hover {
@@ -208,4 +217,95 @@
 @keyframes slideIn {
     from { transform: translateY(-50px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .videos-section h2 {
+        font-size: 2rem;
+    }
+
+    .video-carousel-container {
+        padding: 0 40px; /* Ajustar padding para botões */
+    }
+
+    .video-item {
+        padding: 15px; /* Reduzir padding do item */
+    }
+
+    .video-item h3 {
+        font-size: 1.6rem;
+    }
+
+    .carousel-button {
+        padding: 8px 12px;
+        font-size: 1.2rem;
+    }
+
+    .add-video-button {
+        font-size: 0.95rem;
+        padding: 10px 20px;
+        width: 90%; /* Ocupar mais espaço em telas menores */
+    }
+
+    .video-modal-content {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .video-modal-content h3 {
+        font-size: 1.6rem;
+    }
+
+    .video-modal-content input,
+    .video-modal-content textarea {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .video-form-actions button {
+        font-size: 0.95rem;
+        padding: 10px 15px;
+    }
+
+    .delete-video-button {
+        width: 24px;
+        height: 24px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .videos-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .video-carousel-container {
+        padding: 0 30px; /* Ainda mais espaço para botões */
+    }
+
+    .video-item {
+        padding: 10px;
+    }
+
+    .video-item h3 {
+        font-size: 1.4rem;
+    }
+
+    .carousel-button {
+        padding: 6px 10px;
+        font-size: 1rem;
+    }
+
+    .add-video-button {
+        width: 100%;
+    }
+
+    .video-modal-content {
+        padding: 15px;
+    }
+
+    .video-modal-content h3 {
+        font-size: 1.4rem;
+    }
 } 

@@ -1,0 +1,129 @@
+.upcoming-dates-list,
+.date-ideas-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.upcoming-date-item,
+.date-idea-item {
+    background: white;
+    padding: 15px 20px;
+    margin-bottom: 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.upcoming-date-item:last-child,
+.date-idea-item:last-child {
+    border-bottom: none;
+}
+
+.upcoming-date-item:hover,
+.date-idea-item:hover {
+    background-color: #f9f9f9;
+}
+
+.upcoming-date-item span,
+.date-idea-item span {
+    font-size: 1.1em;
+    color: #333;
+    flex-grow: 1;
+    text-align: left;
+    word-break: break-word;
+}
+
+.delete-date-button,
+.delete-idea-button {
+    background: none;
+    border: none;
+    color: #ff69b4;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 5px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.delete-date-button:hover,
+.delete-idea-button:hover {
+    color: #ff1493;
+    transform: scale(1.1);
+}
+
+.no-items-message {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.error-message {
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+    display: none;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .upcoming-date-item,
+    .date-idea-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 15px;
+    }
+
+    .upcoming-date-item span,
+    .date-idea-item span {
+        font-size: 1em;
+    }
+
+    .delete-date-button,
+    .delete-idea-button {
+        align-self: flex-end;
+        font-size: 0.9em;
+        padding: 3px;
+    }
+
+    .no-items-message {
+        font-size: 0.9em;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .upcoming-date-item,
+    .date-idea-item {
+        padding: 10px;
+    }
+
+    .upcoming-date-item span,
+    .date-idea-item span {
+        font-size: 0.9em;
+    }
+
+    .delete-date-button,
+    .delete-idea-button {
+        font-size: 0.8em;
+    }
+
+    .no-items-message {
+        font-size: 0.85em;
+        padding: 10px;
+    }
+} 

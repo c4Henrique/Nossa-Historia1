@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/cartinha-de-amor.css">
     <link rel="stylesheet" href="assets/css/videos.css">
+    <link rel="stylesheet" href="assets/css/dates-and-events.css">
     <style>
         .close-modal:hover {
             color: #333;
@@ -461,11 +462,6 @@
 </head>
 <body>
     <div class="nav-buttons">
-        <button class="back-button" onclick="window.location.href='index.html'">
-            <i class="fas fa-arrow-left"></i>
-            Voltar
-        </button>
-
         <button class="logout-button" onclick="window.location.href='login.html'">
             <i class="fas fa-sign-out-alt"></i>
             Sair
@@ -500,29 +496,10 @@
             </div>
         </div>
 
-        <!-- Seção de Datas Próximas -->
-        <div class="upcoming-dates">
-            <h2>Nossas Datas Próximas</h2>
-            <div class="date-form">
-                <div class="form-group">
-                    <label for="dateTitle">Título da Data:</label>
-                    <input type="text" id="dateTitle" placeholder="Ex: Aniversário de Namoro">
-                </div>
-                <div class="form-group">
-                    <label for="dateTime">Data e Hora:</label>
-                    <input type="datetime-local" id="dateTime">
-                </div>
-                <button class="add-date-button" onclick="addNewDate()">
-                    <i class="fas fa-plus"></i>
-                    Adicionar Data
-                </button>
-            </div>
-            <div class="dates-list" id="datesList">
-                <!-- As datas serão adicionadas aqui via JavaScript -->
-            </div>
-        </div>
-
-        <h1 class="gallery-title">Nossos Momentos Especiais</h1>
+        <h1 class="gallery-title">
+            <img src="../Nossa-Historia-main/assets/img/icones/logo.png" alt="Logo Sophia Copque" class="gallery-logo">
+            Nossos Momentos Especiais
+        </h1>
 
         <section class="carousel-section">
             <div class="carousel-container">
@@ -553,13 +530,10 @@
         </div>
 
         <main>
-            <section class="hero">
-                <div class="logo-large">
-                    <img src="assets/img/icones/logo.png" alt="Logo SC" class="logo-img-large">
-                </div>
-                <p class="relationship-date">Juntos desde: <span id="start-date">26/10/2024</span></p>
-                <iframe style="border-radius:12px; margin-top: 20px;" src="https://open.spotify.com/embed/playlist/7JOvU0YPsefdfyYjt9uDzh?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </section>
+            <header class="hero">
+                <h1>Nosso Amor</h1>
+                <p class="relationship-date" id="relationshipDate">Desde 01 de Janeiro de 2023</p>
+            </header>
 
             <section class="cards-section">
                 <h2>Nossos Momentos Especiais</h2>
@@ -598,15 +572,24 @@
                 </button>
             </section>
 
-            <section class="dates-ideas">
+            <section id="upcoming-dates" class="section cards-section">
+                <h2>Nossas Datas Próximas</h2>
+                <ul class="upcoming-dates-list">
+                    <!-- Datas serão carregadas aqui via JavaScript -->
+                </ul>
+                <button id="openNewDateModal" class="add-button">
+                    <i class="fas fa-plus"></i> Adicionar Nova Data
+                </button>
+            </section>
+
+            <section id="date-ideas" class="section cards-section">
                 <h2>Nossas Ideias de Dates</h2>
-                <div class="dates-form">
-                    <input type="text" id="new-date-idea" placeholder="Adicione uma nova ideia de date...">
-                    <button id="save-date-idea">Salvar</button>
-                </div>
-                <div class="dates-list" id="dates-list">
-                    <!-- As ideias serão carregadas via JavaScript -->
-                </div>
+                <ul class="date-ideas-list">
+                    <!-- Ideias serão carregadas aqui via JavaScript -->
+                </ul>
+                <button id="openNewIdeaModal" class="add-button">
+                    <i class="fas fa-plus"></i> Adicionar Nova Ideia
+                </button>
             </section>
 
             <section class="videos-section">
@@ -629,6 +612,16 @@
                     <!-- O calendário será renderizado aqui -->
                 </div>
             </section>
+
+            <section id="photos" class="section">
+                <h2>Nossas Fotos</h2>
+                <div class="photos-container" id="photosContainer">
+                    <!-- As fotos serão carregadas aqui via JavaScript -->
+                </div>
+                <button id="openNewPhotoModal" class="add-button">
+                    <i class="fas fa-plus"></i> Adicionar Nova Foto
+                </button>
+            </section>
         </main>
 
         <footer>
@@ -636,23 +629,26 @@
         </footer>
     </div>
 
-    <!-- Modal para escrever nova carta -->
-    <div id="newLetterModal" class="love-letter-modal">
-        <div class="love-letter-modal-content">
-            <span class="close-modal" id="closeNewLetterModal">&times;</span>
-            <h3>Escrever Nova Cartinha de Amor</h3>
-            <div class="form-group">
-                <label for="newLetterTitle">Título da Carta:</label>
-                <input type="text" id="newLetterTitle" placeholder="Um título para a sua carta...">
-            </div>
-            <div class="form-group">
-                <label for="newLetterContent">Conteúdo da Carta:</label>
-                <textarea id="newLetterContent" placeholder="Escreva sua cartinha aqui..."></textarea>
-            </div>
-            <div class="love-letter-form-actions">
-                <button type="button" class="cancel-button" id="cancelNewLetterButton">Cancelar</button>
-                <button type="submit" class="save-button" id="saveNewLetterButton">Salvar Cartinha</button>
-            </div>
+    <!-- Modal para Nova Carta -->
+    <div id="newLetterModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Nova Cartinha de Amor</h3>
+            <form id="newLetterForm">
+                <div class="form-group">
+                    <label for="letterTitle">Título:</label>
+                    <input type="text" id="letterTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="letterContent">Mensagem:</label>
+                    <textarea id="letterContent" required></textarea>
+                </div>
+                <div class="error-message"></div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-button">Cancelar</button>
+                    <button type="submit" class="save-button">Salvar</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -693,12 +689,78 @@
         </div>
     </div>
 
+    <!-- Modal para adicionar nova foto -->
+    <div id="newPhotoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Adicionar Nova Foto</h2>
+            <form id="newPhotoForm">
+                <div class="form-group">
+                    <label for="photoTitle">Título:</label>
+                    <input type="text" id="photoTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="photoDescription">Descrição:</label>
+                    <textarea id="photoDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="photoFile">Foto:</label>
+                    <input type="file" id="photoFile" accept="image/*" required>
+                </div>
+                <button type="submit" class="save-button">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar nova data -->
+    <div id="newDateModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Adicionar Nova Data Próxima</h2>
+            <form id="newDateForm">
+                <div class="error-message" style="display: none;"></div>
+                <div class="form-group">
+                    <label for="dateTitle">Título do Evento:</label>
+                    <input type="text" id="dateTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="dateDate">Data:</label>
+                    <input type="date" id="dateDate" required>
+                </div>
+                <button type="submit" class="save-button">Salvar Data</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar nova ideia de date -->
+    <div id="newIdeaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Adicionar Nova Ideia de Date</h2>
+            <form id="newIdeaForm">
+                <div class="error-message" style="display: none;"></div>
+                <div class="form-group">
+                    <label for="ideaTitle">Título da Ideia:</label>
+                    <input type="text" id="ideaTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="ideaDescription">Descrição:</label>
+                    <textarea id="ideaDescription" required></textarea>
+                </div>
+                <button type="submit" class="save-button">Salvar Ideia</button>
+            </form>
+        </div>
+    </div>
+
     <script src="assets/js/script.js"></script>
     <script src="assets/js/calendario.js"></script>
-    <script src="assets/js/dates.js"></script>
     <script src="assets/js/home_carousel.js"></script>
-    <script src="assets/js/cartinha-de-amor.js"></script>
+    <script type="module" src="assets/js/cartinha-de-amor.js"></script>
     <script src="assets/js/videos.js"></script>
+    <script type="module" src="assets/js/firebase-config.js"></script>
+    <script type="module" src="assets/js/mural.js"></script>
+    <script type="module" src="assets/js/firebase.js"></script>
+    <script type="module" src="assets/js/dates-and-events.js"></script>
     <script>
         // Função para calcular o tempo até o próximo aniversário
         function updateCountdown() {
@@ -733,96 +795,6 @@
         // Atualizar a cada segundo
         updateCountdown();
         setInterval(updateCountdown, 1000);
-
-        // Função para adicionar nova data
-        function addNewDate() {
-            const title = document.getElementById('dateTitle').value;
-            const dateTime = document.getElementById('dateTime').value;
-            
-            if (!title || !dateTime) {
-                alert('Por favor, preencha todos os campos!');
-                return;
-            }
-
-            const dateId = Date.now();
-            const dateCard = document.createElement('div');
-            dateCard.className = 'date-card';
-            dateCard.innerHTML = `
-                <button class="delete-date" onclick="deleteDate(${dateId})">
-                    <i class="fas fa-times"></i>
-                </button>
-                <div class="date-title">${title}</div>
-                <div class="date-countdown" id="countdown-${dateId}">
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="months-${dateId}">0</div>
-                        <div class="countdown-label">Meses</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="days-${dateId}">0</div>
-                        <div class="countdown-label">Dias</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="hours-${dateId}">0</div>
-                        <div class="countdown-label">Horas</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="minutes-${dateId}">0</div>
-                        <div class="countdown-label">Min</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="seconds-${dateId}">0</div>
-                        <div class="countdown-label">Seg</div>
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('datesList').appendChild(dateCard);
-            
-            // Limpar o formulário
-            document.getElementById('dateTitle').value = '';
-            document.getElementById('dateTime').value = '';
-
-            // Iniciar a contagem regressiva
-            updateDateCountdown(dateTime, dateId);
-        }
-
-        // Função para excluir uma data
-        function deleteDate(id) {
-            if (confirm('Tem certeza que deseja excluir esta data?')) {
-                const element = document.getElementById(`countdown-${id}`).parentElement;
-                element.remove();
-            }
-        }
-
-        // Função para atualizar a contagem regressiva de uma data
-        function updateDateCountdown(targetDate, id) {
-            const target = new Date(targetDate);
-            
-            function update() {
-                const now = new Date();
-                const diff = target - now;
-                
-                if (diff <= 0) {
-                    document.getElementById(`countdown-${id}`).innerHTML = '<div class="date-title">Chegou o grande dia! 🎉</div>';
-                    return;
-                }
-                
-                const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
-                const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                
-                document.getElementById(`months-${id}`).textContent = months;
-                document.getElementById(`days-${id}`).textContent = days;
-                document.getElementById(`hours-${id}`).textContent = hours;
-                document.getElementById(`minutes-${id}`).textContent = minutes;
-                document.getElementById(`seconds-${id}`).textContent = seconds;
-            }
-            
-            update();
-            setInterval(update, 1000); // Atualizar a cada segundo
-        }
     </script>
 </body>
 </html>

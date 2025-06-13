@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossas Memórias - Sophia Copque</title>
+    <title>Nossas Memórias</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/mural.css">
     <style>
         .gallery-container {
             max-width: 1200px;
@@ -237,188 +239,55 @@
     </style>
 </head>
 <body>
+    <div class="nav-buttons">
     <button class="back-button" onclick="window.location.href='index.html'">
         <i class="fas fa-arrow-left"></i>
         Voltar
     </button>
-
-    <button class="logout-button" onclick="window.location.href='login.html'">
-        <i class="fas fa-sign-out-alt"></i>
-        Sair
-    </button>
+    </div>
 
     <div class="gallery-container">
         <h1 class="gallery-title">Nossas Memórias</h1>
 
-        <div class="gallery-grid" id="gallery-grid">
-            <!-- Os itens serão carregados via JavaScript -->
+        <section class="section">
+            <div class="photos-container" id="photosContainer">
+                <!-- As fotos serão carregadas aqui via JavaScript -->
         </div>
-
-        <!-- Formulário para adicionar nova memória -->
-        <div class="add-memory-form">
-            <h2>Adicionar Nova Memória</h2>
-            <form id="addMemoryForm">
-                <div class="form-group">
-                    <label for="memoryTitle">Título:</label>
-                    <input type="text" id="memoryTitle" required>
-                </div>
-                <div class="form-group">
-                    <label for="memoryDescription">Descrição:</label>
-                    <textarea id="memoryDescription" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="memoryDate">Data:</label>
-                    <input type="date" id="memoryDate" required>
-                </div>
-                <div class="form-group">
-                    <label for="memoryFile">Foto:</label>
-                    <input type="file" id="memoryFile" accept="image/*" required>
-                </div>
-                <button type="submit" class="submit-button">Adicionar Memória</button>
-            </form>
-        </div>
+            <button id="openNewPhotoModal" class="add-button">
+                <i class="fas fa-plus"></i> Adicionar Nova Foto
+            </button>
+        </section>
     </div>
 
-    <!-- Modal de edição -->
-    <div id="editModal" class="modal">
+    <!-- Modal para adicionar nova foto -->
+    <div id="newPhotoModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h2>Editar Memória</h2>
-            <form id="editMemoryForm">
-                <input type="hidden" id="editMemoryId">
+            <h2>Adicionar Nova Foto</h2>
+            <form id="newPhotoForm">
                 <div class="form-group">
-                    <label for="editMemoryTitle">Título:</label>
-                    <input type="text" id="editMemoryTitle" required>
+                    <label for="photoTitle">Título:</label>
+                    <input type="text" id="photoTitle" required>
                 </div>
                 <div class="form-group">
-                    <label for="editMemoryDescription">Descrição:</label>
-                    <textarea id="editMemoryDescription" required></textarea>
+                    <label for="photoDescription">Descrição:</label>
+                    <textarea id="photoDescription" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="editMemoryDate">Data:</label>
-                    <input type="date" id="editMemoryDate" required>
+                    <label for="photoFile">Foto:</label>
+                    <input type="file" id="photoFile" accept="image/*" required>
                 </div>
-                <button type="submit" class="submit-button">Salvar Alterações</button>
+                <button type="submit" class="save-button">Salvar</button>
             </form>
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        import { initMemoriesPage } from './assets/js/memories.js';
+        
+        // Inicializar a página com o nome correto
         document.addEventListener('DOMContentLoaded', () => {
-            const galleryGrid = document.getElementById('gallery-grid');
-            const addMemoryForm = document.getElementById('addMemoryForm');
-            const editMemoryForm = document.getElementById('editMemoryForm');
-            const editModal = document.getElementById('editModal');
-            const closeModal = document.querySelector('.close-modal');
-            
-            // Lista de todas as imagens
-            let mediaItems = [
-                // Imagens
-                { type: 'image', src: 'assets/img/galeria/1.jpg', title: 'Memória 1', description: 'Nossa primeira foto juntos', date: '2024' },
-                { type: 'image', src: 'assets/img/galeria/2.jpg', title: 'Memória 2', description: 'Dia especial', date: '2024' },
-                { type: 'image', src: 'assets/img/galeria/3.jpg', title: 'Memória 3', description: 'Momentos inesquecíveis', date: '2024' },
-                { type: 'image', src: 'assets/img/galeria/4.jpg', title: 'Memória 4', description: 'Nosso amor', date: '2024' },
-                { type: 'image', src: 'assets/img/galeria/5.jpg', title: 'Memória 5', description: 'Juntos para sempre', date: '2024' }
-            ];
-
-            // Função para renderizar os itens
-            function renderGallery() {
-                galleryGrid.innerHTML = '';
-                mediaItems.forEach((item, index) => {
-                    const galleryItem = document.createElement('div');
-                    galleryItem.className = 'gallery-item';
-
-                    const actions = document.createElement('div');
-                    actions.className = 'actions';
-                    actions.innerHTML = `
-                        <button class="action-button edit-button" onclick="editMemory(${index})">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-button delete-button" onclick="deleteMemory(${index})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    `;
-
-                    galleryItem.innerHTML = `
-                        <img src="${item.src}" alt="${item.title}">
-                        <div class="overlay">
-                            <h3>${item.title}</h3>
-                            <p>${item.description || ''}</p>
-                            <p>${item.date}</p>
-                        </div>
-                    `;
-
-                    galleryItem.appendChild(actions);
-                    galleryGrid.appendChild(galleryItem);
-                });
-            }
-
-            // Função para adicionar nova memória
-            addMemoryForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const file = document.getElementById('memoryFile').files[0];
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    const newMemory = {
-                        type: 'image',
-                        src: e.target.result,
-                        title: document.getElementById('memoryTitle').value,
-                        description: document.getElementById('memoryDescription').value,
-                        date: document.getElementById('memoryDate').value
-                    };
-
-                    mediaItems.push(newMemory);
-                    renderGallery();
-                    addMemoryForm.reset();
-                };
-
-                reader.readAsDataURL(file);
-            });
-
-            // Função para editar memória
-            window.editMemory = function(index) {
-                const item = mediaItems[index];
-                document.getElementById('editMemoryId').value = index;
-                document.getElementById('editMemoryTitle').value = item.title;
-                document.getElementById('editMemoryDescription').value = item.description || '';
-                document.getElementById('editMemoryDate').value = item.date;
-                editModal.style.display = 'block';
-            };
-
-            // Função para deletar memória
-            window.deleteMemory = function(index) {
-                if (confirm('Tem certeza que deseja excluir esta memória?')) {
-                    mediaItems.splice(index, 1);
-                    renderGallery();
-                }
-            };
-
-            // Fechar modal
-            closeModal.onclick = function() {
-                editModal.style.display = 'none';
-            };
-
-            window.onclick = function(event) {
-                if (event.target == editModal) {
-                    editModal.style.display = 'none';
-                }
-            };
-
-            // Salvar edição
-            editMemoryForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const index = document.getElementById('editMemoryId').value;
-                mediaItems[index].title = document.getElementById('editMemoryTitle').value;
-                mediaItems[index].description = document.getElementById('editMemoryDescription').value;
-                mediaItems[index].date = document.getElementById('editMemoryDate').value;
-                
-                renderGallery();
-                editModal.style.display = 'none';
-            });
-
-            // Renderizar galeria inicial
-            renderGallery();
+            initMemoriesPage('memories');
         });
     </script>
 </body>

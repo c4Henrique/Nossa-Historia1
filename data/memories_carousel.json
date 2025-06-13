@@ -1,52 +1,64 @@
 {
     "carousel_images": [
         {
-            "id": 1,
             "src": "assets/img/galeria/1.jpg",
             "alt": "Memória 1",
-            "caption": "Nossa memória especial"
+            "caption": "Nossa primeira foto juntos",
+            "date": "2024"
         },
         {
-            "id": 2,
             "src": "assets/img/galeria/2.jpg",
             "alt": "Memória 2",
-            "caption": "Nossa memória especial"
+            "caption": "Nosso primeiro encontro",
+            "date": "2024"
         },
         {
-            "id": 3,
             "src": "assets/img/galeria/3.jpg",
             "alt": "Memória 3",
-            "caption": "Nossa memória especial"
+            "caption": "Nosso primeiro beijo",
+            "date": "2024"
         },
         {
-            "id": 6,
+            "src": "assets/img/galeria/4.jpg",
+            "alt": "Memória 4",
+            "caption": "Nosso primeiro abraço",
+            "date": "2024"
+        },
+        {
+            "src": "assets/img/galeria/5.jpg",
+            "alt": "Memória 5",
+            "caption": "Nosso primeiro passeio",
+            "date": "2024"
+        },
+        {
             "src": "assets/img/galeria/6.jpg",
             "alt": "Memória 6",
-            "caption": "Nossa memória especial"
+            "caption": "Nosso primeiro jantar",
+            "date": "2024"
         },
         {
-            "id": 7,
             "src": "assets/img/galeria/7.jpg",
             "alt": "Memória 7",
-            "caption": "Nossa memória especial"
+            "caption": "Nosso primeiro filme",
+            "date": "2024"
         },
         {
-            "id": 8,
             "src": "assets/img/galeria/8.jpg",
             "alt": "Memória 8",
-            "caption": "Nossa memória especial"
+            "caption": "Nosso primeiro café",
+            "date": "2024"
         },
         {
-            "id": 9,
             "src": "assets/img/galeria/9.jpg",
             "alt": "Memória 9",
-            "caption": "Nossa memória especial"
+            "caption": "Nosso primeiro sorriso",
+            "date": "2024"
         },
         {
-            "id": 10,
             "src": "assets/img/galeria/10.jpg",
             "alt": "Memória 10",
-            "caption": "Nossa memória especial"
+            "caption": "Nosso primeiro olhar",
+            "date": "2024"
         },
         {
             "id": 11,

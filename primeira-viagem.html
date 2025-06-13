@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primeira Viagem - Sophia Copque</title>
+    <title>Nossa Primeira Viagem</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/mural.css">
     <style>
         .gallery-container {
             max-width: 1200px;
@@ -89,32 +91,56 @@
     </style>
 </head>
 <body>
+    <div class="nav-buttons">
     <button class="back-button" onclick="window.location.href='index.html'">
         <i class="fas fa-arrow-left"></i>
         Voltar
     </button>
-
-    <button class="logout-button" onclick="window.location.href='login.html'">
-        <i class="fas fa-sign-out-alt"></i>
-        Sair
-    </button>
+    </div>
 
     <div class="gallery-container">
         <h1 class="gallery-title">Nossa Primeira Viagem</h1>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="assets/img/galeria/3.jpg" alt="Primeira Viagem">
+        
+        <section class="section">
+            <div class="photos-container" id="photosContainer">
+                <!-- As fotos serão carregadas aqui via JavaScript -->
             </div>
-            <div class="gallery-item">
-                <img src="assets/img/galeria/4.jpg" alt="Primeira Viagem">
+            <button id="openNewPhotoModal" class="add-button">
+                <i class="fas fa-plus"></i> Adicionar Nova Foto
+            </button>
+        </section>
+    </div>
+
+    <!-- Modal para adicionar nova foto -->
+    <div id="newPhotoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Adicionar Nova Foto</h2>
+            <form id="newPhotoForm">
+                <div class="form-group">
+                    <label for="photoTitle">Título:</label>
+                    <input type="text" id="photoTitle" required>
             </div>
-            <div class="gallery-item">
-                <img src="assets/img/galeria/5.jpg" alt="Primeira Viagem">
+                <div class="form-group">
+                    <label for="photoDescription">Descrição:</label>
+                    <textarea id="photoDescription" required></textarea>
             </div>
-            <div class="gallery-item">
-                <img src="assets/img/galeria/46.jpg" alt="Primeira Viagem">
+                <div class="form-group">
+                    <label for="photoFile">Foto:</label>
+                    <input type="file" id="photoFile" accept="image/*" required>
             </div>
+                <button type="submit" class="save-button">Salvar</button>
+            </form>
         </div>
     </div>
+
+    <script type="module">
+        import { initMemoriesPage } from './assets/js/memories.js';
+        
+        // Inicializar a página com o nome correto
+        document.addEventListener('DOMContentLoaded', () => {
+            initMemoriesPage('primeira-viagem');
+        });
+    </script>
 </body>
 </html> 
