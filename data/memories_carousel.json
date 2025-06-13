@@ -1,0 +1,148 @@
+{
+    "carousel_images": [
+        {
+            "id": 1,
+            "src": "assets/img/galeria/1.jpg",
+            "alt": "Memória 1",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 2,
+            "src": "assets/img/galeria/2.jpg",
+            "alt": "Memória 2",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 3,
+            "src": "assets/img/galeria/3.jpg",
+            "alt": "Memória 3",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 6,
+            "src": "assets/img/galeria/6.jpg",
+            "alt": "Memória 6",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 7,
+            "src": "assets/img/galeria/7.jpg",
+            "alt": "Memória 7",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 8,
+            "src": "assets/img/galeria/8.jpg",
+            "alt": "Memória 8",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 9,
+            "src": "assets/img/galeria/9.jpg",
+            "alt": "Memória 9",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 10,
+            "src": "assets/img/galeria/10.jpg",
+            "alt": "Memória 10",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 11,
+            "src": "assets/img/galeria/11.jpg",
+            "alt": "Memória 11",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 13,
+            "src": "assets/img/galeria/14.jpg",
+            "alt": "Memória 13",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 14,
+            "src": "assets/img/galeria/15.jpg",
+            "alt": "Memória 14",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 15,
+            "src": "assets/img/galeria/16.jpg",
+            "alt": "Memória 15",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 16,
+            "src": "assets/img/galeria/17.jpg",
+            "alt": "Memória 16",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 17,
+            "src": "assets/img/galeria/18.jpg",
+            "alt": "Memória 17",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 18,
+            "src": "assets/img/galeria/19.jpg",
+            "alt": "Memória 18",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 19,
+            "src": "assets/img/galeria/20.jpg",
+            "alt": "Memória 19",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 20,
+            "src": "assets/img/galeria/21.jpg",
+            "alt": "Memória 20",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 21,
+            "src": "assets/img/galeria/22.jpg",
+            "alt": "Memória 21",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 22,
+            "src": "assets/img/galeria/25.jpg",
+            "alt": "Memória 24",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 25,
+            "src": "assets/img/galeria/27.jpg",
+            "alt": "Memória 26",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 27,
+            "src": "assets/img/galeria/28.jpg",
+            "alt": "Memória 27",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 28,
+            "src": "assets/img/galeria/29.jpg",
+            "alt": "Memória 28",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 29,
+            "src": "assets/img/galeria/30.jpg",
+            "alt": "Memória 29",
+            "caption": "Nossa memória especial"
+        },
+        {
+            "id": 30,
+            "src": "assets/img/galeria/31.jpg",
+            "alt": "Memória 30",
+            "caption": "Nossa memória especial"
+        }
+    ]
+} 

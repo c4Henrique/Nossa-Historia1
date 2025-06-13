@@ -1,0 +1,249 @@
+/* Estilos para a seção da Cartinha de Amor */
+/* .love-letter-section {
+    margin: 40px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+} */
+
+.love-letter-title {
+    font-family: 'Dancing Script', cursive;
+    color: #ff69b4;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);
+}
+
+.love-letters-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px;
+    justify-content: center;
+    align-items: start;
+}
+
+.love-letter-card {
+    background: linear-gradient(135deg, #FFC0CB, #FF69B4);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+    opacity: 0; /* Começa invisível para o fade-in */
+    transform: translateY(20px); /* Começa um pouco abaixo para o efeito */
+    animation: fadeInSlideUp 0.6s forwards;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px; /* Garante altura mínima para layout */
+}
+
+.love-letter-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.love-letter-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+}
+
+.love-letter-card h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.love-letter-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante */
+}
+
+.new-letter-button {
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    transition: all 0.3s ease;
+    margin-top: 30px;
+}
+
+.new-letter-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+    background: linear-gradient(45deg, #ff1493, #ff69b4);
+}
+
+/* Modal para adicionar nova carta */
+.love-letter-modal {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Posição fixa para cobrir toda a tela */
+    z-index: 1001; /* Z-index alto para sobrepor outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Habilita rolagem se o conteúdo for muito grande */
+    background-color: rgba(0,0,0,0.6); /* Fundo semi-transparente */
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.love-letter-modal.show {
+    display: flex;
+}
+
+.love-letter-modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border-radius: 20px; /* Bordas mais arredondadas */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Sombra mais pronunciada */
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: slideInFromTop 0.4s ease-out;
+}
+
+.love-letter-modal-content h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: #ff69b4;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.love-letter-modal-content label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.love-letter-modal-content input[type="text"],
+.love-letter-modal-content textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #ffb6c1;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.love-letter-modal-content input[type="text"]:focus,
+.love-letter-modal-content textarea:focus {
+    outline: none;
+    border-color: #ff69b4;
+    box-shadow: 0 0 8px rgba(255, 105, 180, 0.4);
+}
+
+.love-letter-modal-content textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.love-letter-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.love-letter-form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.love-letter-form-actions .cancel-button {
+    background-color: #ccc;
+    color: #333;
+}
+
+.love-letter-form-actions .cancel-button:hover {
+    background-color: #bbb;
+    transform: translateY(-2px);
+}
+
+.love-letter-form-actions .save-button {
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.love-letter-form-actions .save-button:hover {
+    background: linear-gradient(45deg, #ff1493, #ff69b4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+}
+
+.love-letter-card .delete-letter-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red; /* Cor de fundo sólida para visibilidade */
+    border: 2px solid blue; /* Borda para demarcar */
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    opacity: 1 !important; /* Agora sempre visível e forçado */
+    z-index: 9999; /* Z-index muito alto */
+}
+
+/* Removendo a regra de hover que controlava a opacidade */
+/*
+.love-letter-card:hover .delete-letter-button {
+    opacity: 1;
+    transform: scale(1.1);
+}
+*/
+
+.love-letter-card .delete-letter-button:hover {
+    background: rgba(255, 0, 0, 0.6); /* Fica vermelho ao hover */
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+} 

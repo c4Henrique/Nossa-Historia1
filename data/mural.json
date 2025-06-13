@@ -1,0 +1,32 @@
+{
+    "photos": [
+        {
+            "id": 1,
+            "title": "Nosso Primeiro Encontro",
+            "description": "O dia em que tudo começou...",
+            "date": "2024-02-14",
+            "image": "assets/img/mural/primeiro-encontro.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Momentos Especiais",
+            "description": "Cada sorriso, cada abraço...",
+            "date": "2024-02-15",
+            "image": "assets/img/mural/momentos-especiais.jpg"
+        },
+        {
+            "id": 3,
+            "title": "Nossa História",
+            "description": "Construindo memórias juntos...",
+            "date": "2024-02-16",
+            "image": "assets/img/mural/nossa-historia.jpg"
+        },
+        {
+            "id": 4,
+            "title": "Amor em Crescimento",
+            "description": "Cada dia mais forte...",
+            "date": "2024-02-17",
+            "image": "assets/img/mural/amor-crescimento.jpg"
+        }
+    ]
+} 

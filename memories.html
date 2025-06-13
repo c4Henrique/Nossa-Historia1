@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossas Memórias - Sophia Copque</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .gallery-title {
+            text-align: center;
+            color: #ff69b4;
+            margin-bottom: 30px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background-color: #ff1493;
+        }
+
+        .logout-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .logout-button:hover {
+            background-color: #ff1493;
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .gallery-item .overlay h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .gallery-item .overlay p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Estilos para o formulário e botões */
+        .add-memory-form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #ff1493;
+        }
+
+        .gallery-item .actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .actions {
+            opacity: 1;
+        }
+
+        .action-button {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-button:hover {
+            background: white;
+        }
+
+        .edit-button {
+            color: #2196F3;
+        }
+
+        .delete-button {
+            color: #f44336;
+        }
+
+        /* Modal de edição */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+        Voltar
+    </button>
+
+    <button class="logout-button" onclick="window.location.href='login.html'">
+        <i class="fas fa-sign-out-alt"></i>
+        Sair
+    </button>
+
+    <div class="gallery-container">
+        <h1 class="gallery-title">Nossas Memórias</h1>
+
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Os itens serão carregados via JavaScript -->
+        </div>
+
+        <!-- Formulário para adicionar nova memória -->
+        <div class="add-memory-form">
+            <h2>Adicionar Nova Memória</h2>
+            <form id="addMemoryForm">
+                <div class="form-group">
+                    <label for="memoryTitle">Título:</label>
+                    <input type="text" id="memoryTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="memoryDescription">Descrição:</label>
+                    <textarea id="memoryDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="memoryDate">Data:</label>
+                    <input type="date" id="memoryDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="memoryFile">Foto:</label>
+                    <input type="file" id="memoryFile" accept="image/*" required>
+                </div>
+                <button type="submit" class="submit-button">Adicionar Memória</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de edição -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Editar Memória</h2>
+            <form id="editMemoryForm">
+                <input type="hidden" id="editMemoryId">
+                <div class="form-group">
+                    <label for="editMemoryTitle">Título:</label>
+                    <input type="text" id="editMemoryTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="editMemoryDescription">Descrição:</label>
+                    <textarea id="editMemoryDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editMemoryDate">Data:</label>
+                    <input type="date" id="editMemoryDate" required>
+                </div>
+                <button type="submit" class="submit-button">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryGrid = document.getElementById('gallery-grid');
+            const addMemoryForm = document.getElementById('addMemoryForm');
+            const editMemoryForm = document.getElementById('editMemoryForm');
+            const editModal = document.getElementById('editModal');
+            const closeModal = document.querySelector('.close-modal');
+            
+            // Lista de todas as imagens
+            let mediaItems = [
+                // Imagens
+                { type: 'image', src: 'assets/img/galeria/1.jpg', title: 'Memória 1', description: 'Nossa primeira foto juntos', date: '2024' },
+                { type: 'image', src: 'assets/img/galeria/2.jpg', title: 'Memória 2', description: 'Dia especial', date: '2024' },
+                { type: 'image', src: 'assets/img/galeria/3.jpg', title: 'Memória 3', description: 'Momentos inesquecíveis', date: '2024' },
+                { type: 'image', src: 'assets/img/galeria/4.jpg', title: 'Memória 4', description: 'Nosso amor', date: '2024' },
+                { type: 'image', src: 'assets/img/galeria/5.jpg', title: 'Memória 5', description: 'Juntos para sempre', date: '2024' }
+            ];
+
+            // Função para renderizar os itens
+            function renderGallery() {
+                galleryGrid.innerHTML = '';
+                mediaItems.forEach((item, index) => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+
+                    const actions = document.createElement('div');
+                    actions.className = 'actions';
+                    actions.innerHTML = `
+                        <button class="action-button edit-button" onclick="editMemory(${index})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-button delete-button" onclick="deleteMemory(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+
+                    galleryItem.innerHTML = `
+                        <img src="${item.src}" alt="${item.title}">
+                        <div class="overlay">
+                            <h3>${item.title}</h3>
+                            <p>${item.description || ''}</p>
+                            <p>${item.date}</p>
+                        </div>
+                    `;
+
+                    galleryItem.appendChild(actions);
+                    galleryGrid.appendChild(galleryItem);
+                });
+            }
+
+            // Função para adicionar nova memória
+            addMemoryForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const file = document.getElementById('memoryFile').files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const newMemory = {
+                        type: 'image',
+                        src: e.target.result,
+                        title: document.getElementById('memoryTitle').value,
+                        description: document.getElementById('memoryDescription').value,
+                        date: document.getElementById('memoryDate').value
+                    };
+
+                    mediaItems.push(newMemory);
+                    renderGallery();
+                    addMemoryForm.reset();
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            // Função para editar memória
+            window.editMemory = function(index) {
+                const item = mediaItems[index];
+                document.getElementById('editMemoryId').value = index;
+                document.getElementById('editMemoryTitle').value = item.title;
+                document.getElementById('editMemoryDescription').value = item.description || '';
+                document.getElementById('editMemoryDate').value = item.date;
+                editModal.style.display = 'block';
+            };
+
+            // Função para deletar memória
+            window.deleteMemory = function(index) {
+                if (confirm('Tem certeza que deseja excluir esta memória?')) {
+                    mediaItems.splice(index, 1);
+                    renderGallery();
+                }
+            };
+
+            // Fechar modal
+            closeModal.onclick = function() {
+                editModal.style.display = 'none';
+            };
+
+            window.onclick = function(event) {
+                if (event.target == editModal) {
+                    editModal.style.display = 'none';
+                }
+            };
+
+            // Salvar edição
+            editMemoryForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const index = document.getElementById('editMemoryId').value;
+                mediaItems[index].title = document.getElementById('editMemoryTitle').value;
+                mediaItems[index].description = document.getElementById('editMemoryDescription').value;
+                mediaItems[index].date = document.getElementById('editMemoryDate').value;
+                
+                renderGallery();
+                editModal.style.display = 'none';
+            });
+
+            // Renderizar galeria inicial
+            renderGallery();
+        });
+    </script>
+</body>
+</html> 

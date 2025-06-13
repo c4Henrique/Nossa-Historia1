@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeira Viagem - Sophia Copque</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .gallery-title {
+            text-align: center;
+            color: #ff69b4;
+            margin-bottom: 30px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background-color: #ff1493;
+        }
+
+        .logout-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .logout-button:hover {
+            background-color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+        Voltar
+    </button>
+
+    <button class="logout-button" onclick="window.location.href='login.html'">
+        <i class="fas fa-sign-out-alt"></i>
+        Sair
+    </button>
+
+    <div class="gallery-container">
+        <h1 class="gallery-title">Nossa Primeira Viagem</h1>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="assets/img/galeria/3.jpg" alt="Primeira Viagem">
+            </div>
+            <div class="gallery-item">
+                <img src="assets/img/galeria/4.jpg" alt="Primeira Viagem">
+            </div>
+            <div class="gallery-item">
+                <img src="assets/img/galeria/5.jpg" alt="Primeira Viagem">
+            </div>
+            <div class="gallery-item">
+                <img src="assets/img/galeria/46.jpg" alt="Primeira Viagem">
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

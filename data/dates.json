@@ -1,0 +1,16 @@
+{
+    "dates": [
+        {
+            "id": 1,
+            "title": "Nosso Primeiro Encontro",
+            "description": "O dia em que tudo começou",
+            "date": "2024-10-26"
+        },
+        {
+            "id": 2,
+            "title": "Primeiro Beijo",
+            "description": "Um momento mágico",
+            "date": "2024-10-26"
+        }
+    ]
+} 

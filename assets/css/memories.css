@@ -1,0 +1,166 @@
+/* Estilos específicos para a página de Memórias e Carrossel */
+
+.carousel-section {
+    margin: 2rem auto; /* Centraliza o carrossel e adiciona margem */
+    padding: 0 2rem;
+    max-width: 900px; /* Ajuste conforme necessário */
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+}
+
+.carousel-slide {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide img {
+    width: 100%; /* Ajustado para 100% da largura do slide individual */
+    object-fit: contain; /* Alterado de 'cover' para 'contain' */
+    border-radius: 15px;
+    flex-shrink: 0; /* Impede que as imagens encolham */
+}
+
+.carousel-prev, .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-prev:hover, .carousel-next:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.carousel-prev {
+    left: 15px;
+}
+
+.carousel-next {
+    right: 15px;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    gap: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: var(--primary-color);
+}
+
+.carousel-caption {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    background-color: #fff;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-top: -15px; /* Para sobrepor um pouco o container */
+    position: relative;
+    z-index: 5;
+}
+
+/* Removendo ou ajustando estilos de tela cheia */
+.hero h1 {
+    display: block; /* Garante que o título da hero section apareça novamente */
+    text-align: center; /* Centraliza o título */
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: var(--primary-color); /* Usar cor do tema */
+}
+
+.memories-cards-section {
+    margin-top: 4rem; /* Espaçamento após o carrossel */
+    padding: 2rem;
+    text-align: center;
+}
+
+.memories-cards-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.memories-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.memories-cards-container .card {
+    padding: 0; /* Removendo o padding para a imagem ocupar todo o espaço */
+    height: auto; /* Garante que a altura do card se ajuste ao conteúdo */
+    overflow: hidden; /* Importante para o border-radius */
+    display: flex; /* Para centralizar conteúdo verticalmente se necessário */
+    flex-direction: column;
+}
+
+.memories-cards-container .card img,
+.memories-cards-container .video-card video {
+    width: 100%;
+    object-fit: contain; /* Garante que a imagem apareça inteira */
+    border-radius: 0; /* Remover borda arredondada da imagem se o card já tiver */
+    margin-bottom: 0; /* Remover margem abaixo da imagem */
+    display: block; /* Para remover qualquer espaço extra abaixo da imagem */
+}
+
+.memories-cards-container .card h3 {
+    font-size: 1.2rem;
+    margin-top: 0.8rem; /* Adicionar margem superior para o título */
+    margin-bottom: 0.5rem;
+    padding: 0 0.8rem; /* Adicionar padding horizontal para o texto */
+}
+
+.memories-cards-container .card p {
+    font-size: 0.9rem;
+    padding: 0 0.8rem 0.8rem; /* Adicionar padding horizontal e inferior */
+}
+
+/* Reutilizando os estilos de .card do style.css, se houver */
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .carousel-section {
+        padding: 0 1rem;
+    }
+
+    .carousel-slide img {
+        height: 300px;
+    }
+
+    .carousel-prev, .carousel-next {
+        padding: 10px;
+        font-size: 1.2rem;
+    }
+} 

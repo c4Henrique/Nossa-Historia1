@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sophia Copque - Nosso Amor</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/cartinha-de-amor.css">
+    <link rel="stylesheet" href="assets/css/videos.css">
+    <style>
+        .close-modal:hover {
+            color: #333;
+        }
+
+        /* Estilos para o calendário */
+        .calendar-container {
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .calendar-title {
+            text-align: center;
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        .calendar-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Estilos para os botões de navegação */
+        .nav-buttons {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+        }
+
+        .back-button, .logout-button {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover, .logout-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+        }
+
+        .back-button:active, .logout-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px rgba(255, 105, 180, 0.3);
+        }
+
+        .back-button i, .logout-button i {
+            font-size: 18px;
+        }
+
+        /* Estilo para o título centralizado */
+        .gallery-title {
+            text-align: center;
+            color: #ff69b4;
+            font-size: 3rem;
+            font-weight: 600;
+            margin: 60px 0;
+            position: relative;
+            padding: 30px 0;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);
+            letter-spacing: 2px;
+        }
+
+        /* .gallery-title::before,
+        .gallery-title::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(255, 105, 180, 0.3);
+        }
+
+        .gallery-title::before {
+            left: calc(50% - 200px);
+        }
+
+        .gallery-title::after {
+            right: calc(50% - 200px);
+        } */
+
+        /* Estilo para o container principal */
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para o carrossel */
+        .carousel-section {
+            margin: 40px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Estilo para o calendário */
+        .calendar-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .calendar-title {
+            text-align: center;
+            color: #ff69b4;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);
+        }
+
+        .calendar-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para a seção principal */
+        main {
+            margin-top: 60px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Estilo para os cards */
+        .cards-section {
+            margin: 40px 0;
+            padding: 20px;
+        }
+
+        .cards-section h2 {
+            text-align: center;
+            color: #ff69b4;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #ff69b4;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Estilo para o botão de adicionar evento */
+        .calendar-actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .add-event-button {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .add-event-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+        }
+
+        .add-event-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px rgba(255, 105, 180, 0.3);
+        }
+
+        .add-event-button i {
+            font-size: 18px;
+        }
+
+        /* Estilos para o contador de aniversário */
+        .anniversary-counter {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 40px 0;
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+        }
+
+        .anniversary-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 120px;
+            backdrop-filter: blur(5px);
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .anniversary-counter {
+            animation: pulse 2s infinite;
+        }
+
+        /* Estilos para a seção de datas próximas */
+        .upcoming-dates {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .upcoming-dates h2 {
+            text-align: center;
+            color: #ff69b4;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);
+        }
+
+        .date-form {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ff69b4;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff1493;
+            box-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
+        }
+
+        .dates-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .date-card {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+            position: relative;
+        }
+
+        .delete-date {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .delete-date:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .date-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .date-countdown {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .countdown-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .countdown-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .countdown-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .add-date-button {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .add-date-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <button class="back-button" onclick="window.location.href='index.html'">
+            <i class="fas fa-arrow-left"></i>
+            Voltar
+        </button>
+
+        <button class="logout-button" onclick="window.location.href='login.html'">
+            <i class="fas fa-sign-out-alt"></i>
+            Sair
+        </button>
+    </div>
+
+    <div class="gallery-container">
+        <!-- Contador de Aniversário -->
+        <div class="anniversary-counter">
+            <h2 class="anniversary-title">Próximo Aniversário de Namoro</h2>
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="months">0</div>
+                    <div class="countdown-label">Meses</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">0</div>
+                    <div class="countdown-label">Dias</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">0</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">0</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">0</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Datas Próximas -->
+        <div class="upcoming-dates">
+            <h2>Nossas Datas Próximas</h2>
+            <div class="date-form">
+                <div class="form-group">
+                    <label for="dateTitle">Título da Data:</label>
+                    <input type="text" id="dateTitle" placeholder="Ex: Aniversário de Namoro">
+                </div>
+                <div class="form-group">
+                    <label for="dateTime">Data e Hora:</label>
+                    <input type="datetime-local" id="dateTime">
+                </div>
+                <button class="add-date-button" onclick="addNewDate()">
+                    <i class="fas fa-plus"></i>
+                    Adicionar Data
+                </button>
+            </div>
+            <div class="dates-list" id="datesList">
+                <!-- As datas serão adicionadas aqui via JavaScript -->
+            </div>
+        </div>
+
+        <h1 class="gallery-title">Nossos Momentos Especiais</h1>
+
+        <section class="carousel-section">
+            <div class="carousel-container">
+                <div class="carousel-slide">
+                    <!-- Imagens do carrossel serão carregadas via JavaScript -->
+                </div>
+                <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots">
+                    <!-- Pontos de navegação serão carregados via JavaScript -->
+                </div>
+                <div class="carousel-caption">
+                    <!-- Legenda da imagem será carregada via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Calendário do Google -->
+        <div class="calendar-container">
+            <h2 class="calendar-title">Nosso Calendário</h2>
+            <iframe src="https://calendar.google.com/calendar/embed?src=1b4e1f7688673931f2be2933a567aa3eb1dd5cf7e54500e791df899cc9b8458e%40group.calendar.google.com&ctz=America%2FBahia" class="calendar-frame" frameborder="0" scrolling="no"></iframe>
+            <div class="calendar-actions">
+                <button class="add-event-button" onclick="window.open('https://calendar.google.com/calendar/u/0/r/eventedit', '_blank')">
+                    <i class="fas fa-plus"></i>
+                    Adicionar Evento
+                </button>
+            </div>
+        </div>
+
+        <main>
+            <section class="hero">
+                <div class="logo-large">
+                    <img src="assets/img/icones/logo.png" alt="Logo SC" class="logo-img-large">
+                </div>
+                <p class="relationship-date">Juntos desde: <span id="start-date">26/10/2024</span></p>
+                <iframe style="border-radius:12px; margin-top: 20px;" src="https://open.spotify.com/embed/playlist/7JOvU0YPsefdfyYjt9uDzh?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </section>
+
+            <section class="cards-section">
+                <h2>Nossos Momentos Especiais</h2>
+                <div class="cards-container">
+                    <div class="card" onclick="window.location.href='primeira-viagem.html'">
+                        <div class="card-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Primeira Viagem</h3>
+                        <p>o dia da nossa primeira viagem</p>
+                    </div>
+                    
+                    <div class="card" onclick="window.location.href='memories.html'">
+                        <div class="card-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3>Memórias</h3>
+                        <p>Fotografias que contam nossa história de amor...</p>
+                    </div>
+                    <div class="card" onclick="window.location.href='momentos.html'">
+                        <div class="card-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <h3>Nossos Momentos</h3>
+                        <p>Os momentos especiais da nossa história...</p>
+                    </div>
+                </div>
+
+                <!-- Conteúdo da Cartinha de Amor movido para cá -->
+                <h3 class="love-letter-title">Nossas Cartinhas de Amor</h3>
+                <div class="love-letters-container" id="loveLettersContainer">
+                    <!-- Cartas serão carregadas aqui via JavaScript -->
+                </div>
+                <button class="new-letter-button" id="openNewLetterModal">
+                    <i class="fas fa-plus"></i> Escrever nova carta
+                </button>
+            </section>
+
+            <section class="dates-ideas">
+                <h2>Nossas Ideias de Dates</h2>
+                <div class="dates-form">
+                    <input type="text" id="new-date-idea" placeholder="Adicione uma nova ideia de date...">
+                    <button id="save-date-idea">Salvar</button>
+                </div>
+                <div class="dates-list" id="dates-list">
+                    <!-- As ideias serão carregadas via JavaScript -->
+                </div>
+            </section>
+
+            <section class="videos-section">
+                <h2>Nossos Momentos em Vídeo</h2>
+                <div class="video-carousel-container">
+                    <div class="video-carousel" id="videoCarousel">
+                        <!-- Vídeos serão carregados aqui via JavaScript -->
+                    </div>
+                    <button class="carousel-button prev" id="prevVideo"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-button next" id="nextVideo"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <button class="add-video-button" id="openNewVideoModal">
+                    <i class="fas fa-plus"></i> Adicionar Novo Vídeo
+                </button>
+            </section>
+
+            <section class="calendar-section">
+                <h2>Nossas Datas Especiais</h2>
+                <div id="calendario">
+                    <!-- O calendário será renderizado aqui -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <!-- Footer content will be included here -->
+        </footer>
+    </div>
+
+    <!-- Modal para escrever nova carta -->
+    <div id="newLetterModal" class="love-letter-modal">
+        <div class="love-letter-modal-content">
+            <span class="close-modal" id="closeNewLetterModal">&times;</span>
+            <h3>Escrever Nova Cartinha de Amor</h3>
+            <div class="form-group">
+                <label for="newLetterTitle">Título da Carta:</label>
+                <input type="text" id="newLetterTitle" placeholder="Um título para a sua carta...">
+            </div>
+            <div class="form-group">
+                <label for="newLetterContent">Conteúdo da Carta:</label>
+                <textarea id="newLetterContent" placeholder="Escreva sua cartinha aqui..."></textarea>
+            </div>
+            <div class="love-letter-form-actions">
+                <button type="button" class="cancel-button" id="cancelNewLetterButton">Cancelar</button>
+                <button type="submit" class="save-button" id="saveNewLetterButton">Salvar Cartinha</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar novo vídeo -->
+    <div id="newVideoModal" class="video-modal">
+        <div class="video-modal-content">
+            <span class="close-modal" id="closeNewVideoModal">&times;</span>
+            <h3>Adicionar Novo Vídeo</h3>
+            <div class="form-group">
+                <label for="videoTitle">Título do Vídeo:</label>
+                <input type="text" id="videoTitle" placeholder="Um título para o vídeo...">
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de Vídeo:</label>
+                <div class="video-type-selection">
+                    <input type="radio" id="videoTypeUrl" name="videoType" value="url" checked>
+                    <label for="videoTypeUrl">Link (YouTube/Vimeo)</label>
+                    <input type="radio" id="videoTypeLocal" name="videoType" value="local">
+                    <label for="videoTypeLocal">Arquivo Local (assets/img/galeria)</label>
+                </div>
+            </div>
+
+            <div class="form-group" id="videoUrlGroup">
+                <label for="videoUrl">URL do Vídeo:</label>
+                <input type="text" id="videoUrl" placeholder="Cole o link do vídeo aqui...">
+            </div>
+
+            <div class="form-group" id="videoLocalPathGroup" style="display: none;">
+                <label for="videoLocalPath">Caminho do Arquivo Local:</label>
+                <input type="text" id="videoLocalPath" placeholder="Ex: assets/img/galeria/meu-video.mp4">
+            </div>
+
+            <div class="video-form-actions">
+                <button type="button" class="cancel-button" id="cancelNewVideo">Cancelar</button>
+                <button type="submit" class="save-button" id="saveNewVideo">Adicionar Vídeo</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/calendario.js"></script>
+    <script src="assets/js/dates.js"></script>
+    <script src="assets/js/home_carousel.js"></script>
+    <script src="assets/js/cartinha-de-amor.js"></script>
+    <script src="assets/js/videos.js"></script>
+    <script>
+        // Função para calcular o tempo até o próximo aniversário
+        function updateCountdown() {
+            const startDate = new Date('2024-10-26'); // Data do início do namoro
+            const now = new Date();
+            
+            // Calcular o próximo aniversário
+            let nextAnniversary = new Date(startDate);
+            nextAnniversary.setFullYear(now.getFullYear());
+            
+            if (now > nextAnniversary) {
+                nextAnniversary.setFullYear(now.getFullYear() + 1);
+            }
+            
+            const diff = nextAnniversary - now;
+            
+            // Calcular meses, dias, horas, minutos e segundos
+            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+            const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // Atualizar os elementos HTML
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        // Atualizar a cada segundo
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Função para adicionar nova data
+        function addNewDate() {
+            const title = document.getElementById('dateTitle').value;
+            const dateTime = document.getElementById('dateTime').value;
+            
+            if (!title || !dateTime) {
+                alert('Por favor, preencha todos os campos!');
+                return;
+            }
+
+            const dateId = Date.now();
+            const dateCard = document.createElement('div');
+            dateCard.className = 'date-card';
+            dateCard.innerHTML = `
+                <button class="delete-date" onclick="deleteDate(${dateId})">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="date-title">${title}</div>
+                <div class="date-countdown" id="countdown-${dateId}">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="months-${dateId}">0</div>
+                        <div class="countdown-label">Meses</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days-${dateId}">0</div>
+                        <div class="countdown-label">Dias</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours-${dateId}">0</div>
+                        <div class="countdown-label">Horas</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes-${dateId}">0</div>
+                        <div class="countdown-label">Min</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds-${dateId}">0</div>
+                        <div class="countdown-label">Seg</div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('datesList').appendChild(dateCard);
+            
+            // Limpar o formulário
+            document.getElementById('dateTitle').value = '';
+            document.getElementById('dateTime').value = '';
+
+            // Iniciar a contagem regressiva
+            updateDateCountdown(dateTime, dateId);
+        }
+
+        // Função para excluir uma data
+        function deleteDate(id) {
+            if (confirm('Tem certeza que deseja excluir esta data?')) {
+                const element = document.getElementById(`countdown-${id}`).parentElement;
+                element.remove();
+            }
+        }
+
+        // Função para atualizar a contagem regressiva de uma data
+        function updateDateCountdown(targetDate, id) {
+            const target = new Date(targetDate);
+            
+            function update() {
+                const now = new Date();
+                const diff = target - now;
+                
+                if (diff <= 0) {
+                    document.getElementById(`countdown-${id}`).innerHTML = '<div class="date-title">Chegou o grande dia! 🎉</div>';
+                    return;
+                }
+                
+                const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+                const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById(`months-${id}`).textContent = months;
+                document.getElementById(`days-${id}`).textContent = days;
+                document.getElementById(`hours-${id}`).textContent = hours;
+                document.getElementById(`minutes-${id}`).textContent = minutes;
+                document.getElementById(`seconds-${id}`).textContent = seconds;
+            }
+            
+            update();
+            setInterval(update, 1000); // Atualizar a cada segundo
+        }
+    </script>
+</body>
+</html>
